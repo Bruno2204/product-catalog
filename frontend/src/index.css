@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+
+
+/*
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -20,8 +23,6 @@
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -46,10 +47,6 @@
     --shadow:
       rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
   }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
 }
 
 #root {
@@ -64,3 +61,5 @@
 body {
   margin: 0;
 }
+
+*/

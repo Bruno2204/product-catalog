@@ -1,4 +1,4 @@
-import type { CartItem } from './types'
+import type { CartItem } from '../types';
 
 // ── Local cart helpers ─────────────────────────
 // These operate on the cart array from CartContext.
@@ -9,19 +9,19 @@ import type { CartItem } from './types'
 export function calcTotal(cart: CartItem[]): number {
   return cart.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
-    0
-  )
+    0,
+  );
 }
 
 export function calcCount(cart: CartItem[]): number {
-  return cart.reduce((sum, item) => sum + item.quantity, 0)
+  return cart.reduce((sum, item) => sum + item.quantity, 0);
 }
 
 export function findItem(
   cart: CartItem[],
-  productId: number
+  productId: number,
 ): CartItem | undefined {
-  return cart.find(item => item.product.id === productId)
+  return cart.find((item) => item.product.id === productId);
 }
 
 // ── Placeholder for real API calls later ──────

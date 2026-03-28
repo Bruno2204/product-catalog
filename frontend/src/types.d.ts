@@ -78,3 +78,8 @@ export interface CartItem {
   product: Product;
   quantity: number;
 }
+export interface CategoryResults {
+  slug: string;
+  name: string;
+  url: string;
+}

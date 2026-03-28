@@ -1,5 +1,10 @@
 import api from './axios.ts';
-import type { Product, ProductQueryParams, ProductsResponse } from './types';
+import type {
+  CategoryResults,
+  Product,
+  ProductQueryParams,
+  ProductsResponse,
+} from '../types';
 
 // GET /products?limit=12&skip=0
 export async function getProducts(
@@ -31,8 +36,8 @@ export async function getProduct(id: number): Promise<Product> {
 }
 
 // GET /products/categories
-export async function getCategories(): Promise<string[]> {
-  const response = await api.get<string[]>('/products/categories');
+export async function getCategories(): Promise<CategoryResults[]> {
+  const response = await api.get<CategoryResults[]>('/products/categories');
   return response.data;
 }
 

@@ -1,73 +1,15 @@
-# React + TypeScript + Vite
+1. Create the Vite project — scaffold the React app with npm create vite@latest, install react-router-dom and axios
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+2. Folder structure — set up api/, context/, pages/, and components/ directories before writing any code
 
-Currently, two official plugins are available:
+3. API layer (axios) — create a shared axios instance with a base URL and automatic JWT token attachment, plus separate products.js and cart.js API files
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+4. Context — Auth & Cart — build AuthContext for login/logout state and CartContext with useReducer for cart operations
 
-## React Compiler
+5. App.jsx — routing — define all routes with react-router-dom, wrap the app in both providers, and add the ProtectedRoute component that redirects unauthenticated users to login
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+6. CatalogPage — product listing — the main page with search and category filter inputs, a useEffect that re-fetches products when filters change, and a responsive CSS grid of ProductCard components
 
-## Expanding the ESLint configuration
+7. CartPage & checkout — loads the cart from the server on mount, handles item removal, and calls the checkout endpoint then redirects to the order confirmation page
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+8. Environment & CORS — configure .env files for dev and production API URLs, set up CORS on the Express server, and run through a pre-deployment checklist
