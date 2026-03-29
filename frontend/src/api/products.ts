@@ -6,14 +6,20 @@ import type {
   ProductsResponse,
 } from '../types';
 
-// GET /products?limit=12&skip=0
+// GET /products?skip=0
 export async function getProducts(
   params: ProductQueryParams = {},
 ): Promise<ProductsResponse> {
-  const { limit = 12, skip = 0 } = params;
+  const { skip = 0 } = params;
   const response = await api.get<ProductsResponse>('/products', {
-    params: { limit, skip },
+    params: { skip },
   });
+  return response.data;
+}
+
+// GET /products/categories
+export async function getCategories(): Promise<CategoryResults[]> {
+  const response = await api.get<CategoryResults[]>('/products/categories');
   return response.data;
 }
 
@@ -32,12 +38,6 @@ export async function searchProducts(
 // GET /products/:id
 export async function getProduct(id: number): Promise<Product> {
   const response = await api.get<Product>(`/products/${id}`);
-  return response.data;
-}
-
-// GET /products/categories
-export async function getCategories(): Promise<CategoryResults[]> {
-  const response = await api.get<CategoryResults[]>('/products/categories');
   return response.data;
 }
 

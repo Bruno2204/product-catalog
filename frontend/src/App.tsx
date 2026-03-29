@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import CatalogPage from './pages/CatalogPage2';
+import CatalogPage from './components/CatalogPage.tsx';
 import CartPage from './pages/CartPage';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
-import Navbar2 from './components/Navbar2.tsx';
+import Navbar from './components/Navbar.tsx';
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar2 />
+      <Navbar />
       <Routes>
         <Route path='/' element={<CatalogPage />} />
         <Route path='/cart' element={<CartPage />} />

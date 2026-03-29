@@ -83,3 +83,12 @@ export interface CategoryResults {
   name: string;
   url: string;
 }
+
+export interface User {
+  id: number;
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  token?: string;
+}
