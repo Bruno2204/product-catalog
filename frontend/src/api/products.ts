@@ -10,9 +10,9 @@ import type {
 export async function getProducts(
   params: ProductQueryParams = {},
 ): Promise<ProductsResponse> {
-  const { skip = 0 } = params;
+  const { limit = 200 } = params;
   const response = await api.get<ProductsResponse>('/products', {
-    params: { skip },
+    params: { limit },
   });
   return response.data;
 }

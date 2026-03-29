@@ -1,9 +1,18 @@
 import { ChevronDown } from '@/components/Icons.tsx';
-import { useProducts } from '@/hooks/useProducts.ts';
+import { useProductsStore } from '@/store/useProducsStore.ts';
+import { useEffect } from 'react';
 
 export function Filters() {
-  const { search, category, setSearch, setCategory, setSkip, categories } =
-    useProducts();
+  const { search, category, setSearch, setCategory, clearFilters, categories } =
+    useProductsStore();
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      setSearch(search);
+    }, 400);
+    return () => clearTimeout(t);
+  }, [search]);
+
   return (
     <div className='flex flex-col sm:flex-row gap-3 mb-8'>
       <input
@@ -16,7 +25,7 @@ export function Filters() {
 
       <div className='relative'>
         <select
-          value={category}
+          value={category?.slug}
           onChange={(e) => setCategory(e.target.value)}
           className='px-2 py-2.5 rounded-lg border border-gray-300 text-sm bg-white text-gray-700 sm:w-52 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent appearance-none'
         >
@@ -34,11 +43,7 @@ export function Filters() {
 
       {(search || category) && (
         <button
-          onClick={() => {
-            setSearch('');
-            setCategory('');
-            setSkip(0);
-          }}
+          onClick={() => clearFilters()}
           className='px-4 py-2.5 rounded-lg border border-gray-300 text-sm text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer whitespace-nowrap'
         >
           Clear filters

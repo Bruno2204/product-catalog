@@ -1,10 +1,10 @@
 import ProductCard from '@/components/ProductCard.tsx';
 import ProductSkeleton from '@/components/ProductSkeleton.tsx';
 import { LIMIT } from '@/consts.ts';
-import { useProducts } from '@/hooks/useProducts.ts';
+import { useProductsStore } from '@/store/useProducsStore.ts';
 
 export function ProductsGrid() {
-  const { products, loading, query, category } = useProducts();
+  const { paginated: products, loading, search, category } = useProductsStore();
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
       {loading ? (
@@ -13,7 +13,7 @@ export function ProductsGrid() {
         products.map((p) => <ProductCard key={p.id} product={p} />)
       ) : (
         <div className='col-span-full py-20 text-center text-gray-400'>
-          No products found for "{query || category}"
+          No products found for "{search || category?.name}"
         </div>
       )}
     </div>
