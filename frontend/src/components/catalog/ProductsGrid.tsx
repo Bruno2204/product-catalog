@@ -1,5 +1,5 @@
-import ProductCard from '@/components/ProductCard.tsx';
-import ProductSkeleton from '@/components/ProductSkeleton.tsx';
+import ProductCard from '@/components/catalog/ProductCard';
+import ProductSkeleton from '@/components/catalog/ProductSkeleton';
 import { LIMIT } from '@/consts.ts';
 import { useProductsStore } from '@/store/useProducsStore.ts';
 

@@ -1,16 +1,24 @@
 import { ChevronDown } from '@/components/Icons.tsx';
 import { useProductsStore } from '@/store/useProducsStore.ts';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export function Filters() {
   const { search, category, setSearch, setCategory, clearFilters, categories } =
     useProductsStore();
 
+  const [localSearch, setLocalSearch] = useState(search);
+
   useEffect(() => {
     const t = setTimeout(() => {
-      setSearch(search);
+      // Solo actualizamos el store global después de 400ms
+      setSearch(localSearch);
     }, 400);
+
     return () => clearTimeout(t);
+  }, [localSearch, setSearch]);
+
+  useEffect(() => {
+    setLocalSearch(search);
   }, [search]);
 
   return (
@@ -18,8 +26,8 @@ export function Filters() {
       <input
         type='text'
         placeholder='Search products...'
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        value={localSearch}
+        onChange={(e) => setLocalSearch(e.target.value)}
         className='flex-1 px-4 py-2.5 rounded-lg border border-gray-300 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent'
       />
 

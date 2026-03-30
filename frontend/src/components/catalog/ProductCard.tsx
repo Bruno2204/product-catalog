@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useCartStore } from '../store/useCartStore.ts';
-import type { Product } from '../types.ts';
+import { useCartStore } from '../../store/useCartStore.ts';
+import type { Product } from '../../types';
 
 interface Props {
   product: Product;
