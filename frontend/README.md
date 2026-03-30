@@ -13,3 +13,8 @@
 7. CartPage & checkout — loads the cart from the server on mount, handles item removal, and calls the checkout endpoint then redirects to the order confirmation page
 
 8. Environment & CORS — configure .env files for dev and production API URLs, set up CORS on the Express server, and run through a pre-deployment checklist
+
+TODO:
+- Improve CartButton
+- Imprement Checkout
+- Implement Login

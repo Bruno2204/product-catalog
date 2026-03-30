@@ -11,9 +11,12 @@ interface CartState {
   // Actions
   addToCart: (product: Product, quantity?: number) => void;
   removeFromCart: (productId: number) => void;
+  getCartItem: (productId: number) => CartItem | null;
   updateQuantity: (productId: number, quantity: number) => void;
   clearCart: () => void;
   isInCart: (productId: number) => boolean;
+  increaseQuantity: (productId: number) => void;
+  decreaseQuantity: (productId: number) => void;
 }
 export const useCartStore = create<CartState>()(
   persist(
@@ -77,6 +80,30 @@ export const useCartStore = create<CartState>()(
 
       isInCart: (productId) =>
         get().items.some((i) => i.product.id === productId),
+      getCartItem: (productId) =>
+        get().items.find((i) => i.product.id === productId) ?? null,
+      increaseQuantity: (productId) => {
+        set((s) => ({
+          items: s.items.map((i) =>
+            i.product.id === productId ? { ...i, quantity: i.quantity + 1 } : i,
+          ),
+          total:
+            s.total +
+            s.items.find((i) => i.product.id === productId)!.product.price,
+          count: s.count + 1,
+        }));
+      },
+      decreaseQuantity: (productId) => {
+        set((s) => ({
+          items: s.items.map((i) =>
+            i.product.id === productId ? { ...i, quantity: i.quantity - 1 } : i,
+          ),
+          total:
+            s.total -
+            s.items.find((i) => i.product.id === productId)!.product.price,
+          count: s.count - 1,
+        }));
+      },
     }),
     { name: 'cart' },
   ),

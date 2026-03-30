@@ -23,6 +23,7 @@ interface ProductsState {
   totalProducts: number;
 
   setProducts: (products: Product[]) => void;
+  getProductByID: (id: number) => Product | null;
   setCategories: (categories: CategoryResults[]) => void;
   setCategory: (slug: string) => void;
   setSearch: (search: string) => void;
@@ -176,6 +177,11 @@ export const useProductsStore = create<ProductsState>()(
           page: 1,
           paginated: paginateProducts(filtered, 1),
         });
+      },
+
+      getProductByID: (id: number) => {
+        const { allProducts } = get();
+        return allProducts.find((p) => p.id === id) ?? null;
       },
     }),
     { name: 'products' },
